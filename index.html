@@ -1,0 +1,110 @@
+HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Live Interactive Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1> TikTok Live Game</h1>
+            <p class="subtitle">Interactive Voting Game</p>
+        </header>
+
+        <!-- Main Game Area -->
+        <main class="game-area">
+            <!-- Connection Status -->
+            <div class="connection-status" id="connectionStatus">
+                <span class="status-indicator offline"></span>
+                <span id="statusText">Disconnected</span>
+            </div>
+
+            <!-- Setup Panel -->
+            <div class="setup-panel" id="setupPanel">
+                <h2>Setup TikTok Live Connection</h2>
+                <div class="form-group">
+                    <label for="username">TikTok Username:</label>
+                    <input type="text" id="username" placeholder="@your_tiktok_username" />
+                </div>
+                <div class="form-group">
+                    <label for="gameMode">Select Game Mode:</label>
+                    <select id="gameMode">
+                        <option value="voting">Voting Game</option>
+                        <option value="trivia">Trivia Quiz</option>
+                        <option value="wheel">Spinning Wheel</option>
+                        <option value="drawing">Drawing Game</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" onclick="startConnection()">Connect & Start Game</button>
+            </div>
+
+            <!-- Voting Game -->
+            <div class="game-container hidden" id="votingGame">
+                <div class="game-header">
+                    <h2 id="questionText">What's your favorite color?</h2>
+                    <p class="timer" id="timer">Time: 30s</p>
+                </div>
+
+                <div class="voting-options">
+                    <button class="vote-button option-1" onclick="vote(1)">
+                        <span class="option-emoji"></span>
+                        <span class="option-name" id="option1">Red</span>
+                        <span class="vote-count" id="votes1">0</span>
+                    </button>
+                    <button class="vote-button option-2" onclick="vote(2)">
+                        <span class="option-emoji"></span>
+                        <span class="option-name" id="option2">Blue</span>
+                        <span class="vote-count" id="votes2">0</span>
+                    </button>
+                    <button class="vote-button option-3" onclick="vote(3)">
+                        <span class="option-emoji"></span>
+                        <span class="option-name" id="option3">Yellow</span>
+                        <span class="vote-count" id="votes3">0</span>
+                    </button>
+                    <button class="vote-button option-4" onclick="vote(4)">
+                        <span class="option-emoji"></span>
+                        <span class="option-name" id="option4">Green</span>
+                        <span class="vote-count" id="votes4">0</span>
+                    </button>
+                </div>
+
+                <div class="live-chat">
+                    <h3>Live Chat Messages</h3>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message"><strong>System:</strong> Waiting for viewers...</div>
+                    </div>
+                </div>
+
+                <div class="game-controls">
+                    <button class="btn btn-secondary" onclick="resetVotes()">Reset Votes</button>
+                    <button class="btn btn-primary" onclick="endRound()">End Round</button>
+                    <button class="btn btn-danger" onclick="stopGame()">Stop Game</button>
+                </div>
+            </div>
+
+            <!-- Results Screen -->
+            <div class="results-screen hidden" id="resultsScreen">
+                <h2> Round Results</h2>
+                <div class="results-chart" id="resultsChart">
+                    <!-- Results will be dynamically inserted -->
+                </div>
+                <p class="winner-text" id="winnerText"></p>
+                <button class="btn btn-primary" onclick="startNewRound()">Start New Round</button>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Connected Viewers: <span id="viewerCount">0</span></p>
+            <p>Total Messages: <span id="messageCount">0</span></p>
+        </footer>
+    </div>
+
+    <script src="game.js"></script>
+    <script src="tiktok-api.js"></script>
+</body>
+</html>
